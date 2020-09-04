@@ -80,7 +80,7 @@ function getplot(id) {
         };
 
         // present the bar plot
-        Plotly.newPlot("bar", data, layout)
+        Plotly.newPlot("bar", data, layout);
 
 
         // trace for the bubble chart
@@ -106,7 +106,7 @@ function getplot(id) {
         var data1 = [trace1];
 
         // present the bar plot
-        Plotly.newPlot("bubble", data1, layout1)
+        Plotly.newPlot("bubble", data1, layout1);
 
     });
 };

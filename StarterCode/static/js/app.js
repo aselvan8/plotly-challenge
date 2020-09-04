@@ -7,13 +7,14 @@ function init() {
         data.names.forEach(function(name) {
             dropdown.append("option").text(name).node().value;
         });
-        // call initial data
-        getplot(data.name[0]);
-        getinfo(data.names[0]);
+
+    // // call initial data
+    getplot(data.names[0]);
+    getinfo(data.names[0]);
     });
+
 };
 
-init();
 
 // function to get demographic info
 function getinfo(id) {
@@ -51,13 +52,21 @@ function getplot(id) {
         var ids = samples.otu_ids.slice(0, 10).reverse();
         var otuids = ids.map(d => "OTU " + d);
 
+        // get top 10 labels
         var otulables = samples.otu_labels.slice(0, 10);
+
+        // get freq of wash
+        var freq = data.metadata.map(d => d.wfreq);
 
         // trace for the bar chart
         var trace = {
             x: samplevalues,
             y: otuids,
             text: otulables,
+            marker: {
+                color: 'rgb(142,124,195)',
+                opacity: 0.75,
+              },
             type: "bar",
             orientation: "h"
         };
@@ -66,13 +75,8 @@ function getplot(id) {
 
         // layout to set plots layout
         var layout = {
-            title: "Top 10 OTU",
-            margin: {
-                l: 100,
-                r: 100,
-                t: 30,
-                b: 20
-            }
+            title: "Top 10 OTU based on Subject ID",
+            margin: { l: 100, r: 10, t: 30, b: 40}
         };
 
         // present the bar plot
@@ -94,8 +98,8 @@ function getplot(id) {
 
         // layout for the bubble plot
         var layout1 = {
-            xaxis:{title: "OTU"},
-            height: 700,
+            xaxis: {title: "OTU ID"},
+            height: 600,
             width: 1000
         };
 
@@ -112,3 +116,5 @@ function optionChanged(id) {
     getplot(id);
     getinfo(id);
 };
+
+init();
